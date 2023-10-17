@@ -10,14 +10,19 @@ import {
 import { BrandsService } from './brands.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { BrandDto } from './dto/brand.dto';
 
-@ApiTags('brands')
+@ApiTags('Brands')
 @Controller('brands')
 export class BrandsController {
   constructor(private readonly brandsService: BrandsService) {}
 
   @Post()
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    type: BrandDto,
+  })
   create(@Body() createBrandDto: CreateBrandDto) {
     return this.brandsService.create(createBrandDto);
   }

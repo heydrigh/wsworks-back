@@ -6,6 +6,7 @@ import { ModelsModule } from './models/models.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configurationService } from './config/config.service';
 import { BrandsModule } from './brands/brands.module';
+import { CarsModule } from './cars/cars.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { BrandsModule } from './brands/brands.module';
     TypeOrmModule.forRoot(configurationService.getTypeOrmConfig(__dirname)),
     ModelsModule,
     BrandsModule,
+    CarsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

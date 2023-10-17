@@ -1,11 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Brand } from 'src/brands/entities/brand.entity';
+import { Car } from 'src/cars/entities/car.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinTable,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -35,6 +37,10 @@ export class Model {
   @ManyToOne(() => Brand, (brand) => brand.models, { eager: true })
   @JoinTable()
   brand: Brand;
+
+  @OneToMany(() => Car, (car) => car.model)
+  @JoinTable()
+  car: Car[];
 
   constructor(partial: Partial<Model>) {
     Object.assign(this, partial);
