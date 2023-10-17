@@ -1,9 +1,19 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
+import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
+import { ModelsModule } from './models/models.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { configurationService } from './config/config.service';
+import { BrandsModule } from './brands/brands.module';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot(configurationService.getTypeOrmConfig(__dirname)),
+    ModelsModule,
+    BrandsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
